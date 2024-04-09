@@ -1,0 +1,40 @@
+# Execution begins at address 0
+    .pos 0x0
+    irmovq stack, %rsp
+    call main
+    halt
+# list
+    .align 8
+ele1:
+    .quad 0x00a
+    .quad ele2
+ele2:
+    .quad 0x0f0
+    .quad ele3
+ele3:
+    .quad 0xb00
+    .quad 0x0
+
+main:
+    irmovq ele1,%rdi
+    call sum_list
+    ret
+sum_list:
+    irmovq $0,%rax
+    irmovq $8,%r8
+    jmp test
+
+loop:
+    mrmovq (%rdi),%rsi
+    addq %rsi,%rax
+    addq %r8,%rdi
+    mrmovq (%rdi),%rdi
+test:
+    andq %rdi,%rdi 
+    jne loop
+    ret
+
+# Stack starts here and grows to lower addresses
+    .pos 0x200
+stack:
+

@@ -1,0 +1,43 @@
+    .pos 0x0
+    irmovq stack,%rsp
+    call main
+    halt
+# list
+    .align 8
+ele1:
+    .quad 0x00a
+    .quad ele2
+ele2:
+    .quad 0x0b0
+    .quad ele3
+ele3:
+    .quad 0xc00
+    .quad 0x0
+
+main:
+    irmovq ele1,%rdi
+    irmovq 0x0,%rax
+    call judge
+    ret
+rsum_list:
+    mrmovq (%rdi),%rbx
+    mrmovq 8(%rdi),%rdi
+    pushq %rbx
+    call judge
+    popq %rbx
+    addq %rbx,%rax
+    ret
+     
+test:
+    andq %rdi, %rdi
+    jne rsum_list
+    irmovq $0x0,%rax
+    ret
+judge:
+    call test
+    ret
+
+# Stack starts here and grows to lower addresses
+    .pos 0x200
+stack:
+

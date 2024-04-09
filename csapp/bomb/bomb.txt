@@ -1,0 +1,14 @@
+1. Border relations with Canada have never been better.
+2. 1 2 4 8 16 32
+3.  0->0xcf     207
+    1->0x137
+    2->0x2c3
+    3->0x100
+    4->0x185
+    5->0xce
+    6->0x2aa
+4. first number:0,1,3,7
+   second number:0
+5.  build "flyers" by"maduiersnfotvbylSo you think you can stop the bomb with ctrl-c, do you?"
+        eg: "IONEFG"
+6. 4 3 2 1 6 5          

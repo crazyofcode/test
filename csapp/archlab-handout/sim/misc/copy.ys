@@ -1,0 +1,43 @@
+
+    .pos 0x0
+    irmovq stack,%rsp
+    call main
+    halt
+
+    .align 8
+src:
+    .quad 0x00a
+    .quad 0x0b0
+    .quad 0xc00
+dest:
+    .quad 0x111
+    .quad 0x222
+    .quad 0x333
+main:
+    irmovq $0x0,%rax
+    irmovq $0x1,%r8
+    irmovq $0x8,%r9
+    call copy
+    ret
+copy:
+    irmovq src,%rdi
+    irmovq dest,%rsi
+    irmovq $3,%rdx
+    andq %rdx,%rdx
+    jmp test
+    ret
+loop:
+    mrmovq (%rdi),%r10
+    addq %r9,%rdi
+    rmmovq %r10,(%rsi)
+    addq %r9,%rsi
+    xorq %r10,%rax
+    subq %r8,%rdx
+test:
+    jne loop
+    ret
+
+# Stack starts here and grows to lower addresses
+    .pos 0x200
+stack:
+
